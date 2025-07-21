@@ -574,30 +574,32 @@
                 <!-- Contact Form -->
                 <div class="bg-white p-8 rounded-xl shadow-lg text-gray-800">
                     <h3 class="text-xl font-bold text-gray-800 mb-6">Send Me a Message</h3>
-                    <form action="https://submit-form.com/WIxMnqSa2" method="POST">
-                    <form>
+                
+                    <!-- Only one form tag here -->
+                    <form id="contactForm" method="POST">
+                        
                         <div class="mb-4">
                             <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <input type="text" name="name" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                         <div class="mb-4">
                             <label for="email" class="block text-gray-700 font-medium mb-2">Your Email</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                         <div class="mb-4">
                             <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
-                            <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <input type="text" name="subject" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                         <div class="mb-6">
                             <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
-                            <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+                            <textarea name="message" id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
                         </div>
                         <button type="submit" class="w-full py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Send Message
                         </button>
                     </form>
                 </div>
-                
+
                 <!-- Contact Info -->
                 <div>
                     <div class="bg-indigo-700 p-8 rounded-xl shadow-lg mb-6">
@@ -817,6 +819,20 @@
         
         window.addEventListener('scroll', animateOnScroll);
         window.addEventListener('load', animateOnScroll);
+        
+         // formspark
+        async function setFormAction() {
+            try {
+              const response = await fetch('form-id.txt');
+              const text = await response.text();
+              const formId = text.trim().split('=')[1]; // Get the actual ID
+              document.getElementById('contactForm').action = `https://submit-form.com/${formId}`;
+            } catch (error) {
+              console.error('Failed to load form ID:', error);
+            }
+          }
+        
+          setFormAction();
     </script>
 </body>
 </html>
